@@ -20,6 +20,8 @@ export function HeroThemeProvider({ children }: { children: React.ReactNode }) {
 
 export function useHeroTheme() {
   const ctx = useContext(HeroThemeContext)
-  if (!ctx) throw new Error('useHeroTheme must be used within HeroThemeProvider')
+  if (!ctx) {
+    return { theme: 'dark' as const, setTheme: () => {} }
+  }
   return ctx
 }

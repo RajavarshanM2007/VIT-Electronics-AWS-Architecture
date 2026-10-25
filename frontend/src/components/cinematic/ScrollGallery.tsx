@@ -6,6 +6,7 @@ import Link from 'next/link'
 import type { HeroSlide } from './HeroSlider'
 import { useTextStyle } from '@/context/SiteConfigContext'
 import { positionClasses } from '@/components/admin/TextPositionPicker'
+import { safeCdnUrl } from '@/lib/utils'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -66,14 +67,14 @@ export function ScrollGallery({ slides }: { slides: HeroSlide[] }) {
           <div key={i} className="scroll-section relative h-[90vh] md:h-screen w-full overflow-hidden">
             {slide.mediaType === 'video' ? (
               <video
-                src={slide.mediaUrl}
+                src={safeCdnUrl(slide.mediaUrl)}
                 autoPlay muted loop playsInline
                 className="scroll-media absolute inset-0 w-full h-full object-cover"
               />
             ) : (
               <div
                 className="scroll-media absolute inset-0 w-full h-full bg-cover bg-center"
-                style={{ backgroundImage: `url(${slide.mediaUrl})` }}
+                style={{ backgroundImage: `url('${safeCdnUrl(slide.mediaUrl)}')` }}
               />
             )}
 

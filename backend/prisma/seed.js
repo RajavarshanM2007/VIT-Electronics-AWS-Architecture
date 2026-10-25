@@ -136,12 +136,16 @@ async function main() {
     ''
   ).replace(/\/$/, '')
 
+  // Local dev fallback base — images are served from frontend/public/
+  const localBase = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '')
+
   function assetUrl(path, fallback) {
+    const cleanPath = path.startsWith('/') ? path : `/${path}`
     if (cdnBase) {
-      const cleanPath = path.startsWith('/') ? path : `/${path}`
       return `${cdnBase}${cleanPath}`
     }
-    return fallback || path
+    // Use local frontend public directory when no CDN is configured
+    return `${localBase}${cleanPath}`
   }
 
   // 4. TECH CATEGORIES

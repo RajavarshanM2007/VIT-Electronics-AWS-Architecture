@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useHeroTheme } from '@/context/HeroThemeContext'
 import { useButton, useTextStyle } from '@/context/SiteConfigContext'
 import { positionClasses } from '@/components/admin/TextPositionPicker'
+import { safeCdnUrl } from '@/lib/utils'
 
 export interface HeroSlide {
   mediaUrl: string
@@ -81,14 +82,14 @@ export function HeroSlider({ slides }: { slides?: HeroSlide[] }) {
           {slide.mediaUrl ? (
             slide.mediaType === 'video' ? (
               <video
-                src={slide.mediaUrl}
+                src={safeCdnUrl(slide.mediaUrl)}
                 autoPlay muted loop playsInline
                 className="absolute inset-0 w-full h-full object-cover animate-kenburns"
               />
             ) : (
               <div
                 className="absolute inset-0 w-full h-full bg-cover bg-top animate-kenburns"
-                style={{ backgroundImage: `url(${slide.mediaUrl})` }}
+                style={{ backgroundImage: `url('${safeCdnUrl(slide.mediaUrl)}')` }}
               />
             )
           ) : (

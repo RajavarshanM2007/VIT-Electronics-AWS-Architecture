@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import type { ProductImage } from '@/types/product'
+import { safeCdnUrl } from '@/lib/utils'
 
 const AUTO_SLIDE_INTERVAL = 4000
 
@@ -32,9 +33,9 @@ export function ProductImageGallery({ images }: { images: ProductImage[] }) {
                 i === active ? 'border-luxury-gold' : 'border-luxury-gray hover:border-luxury-white'
               }`}>
               {img.isVideo ? (
-                <video src={img.url} className="w-full h-full object-cover" muted playsInline />
+                <video src={safeCdnUrl(img.url)} className="w-full h-full object-cover" muted playsInline />
               ) : (
-                <Image src={img.url} alt={img.altText ?? ''} fill className="object-cover" />
+                <Image src={safeCdnUrl(img.url)} alt={img.altText ?? ''} fill className="object-cover" />
               )}
             </button>
           ))}
@@ -45,12 +46,12 @@ export function ProductImageGallery({ images }: { images: ProductImage[] }) {
         onMouseLeave={() => setPaused(false)}>
         {images.map((img, i) => (
           img.isVideo ? (
-            <video key={img.id} src={img.url} muted loop autoPlay playsInline
+            <video key={img.id} src={safeCdnUrl(img.url)} muted loop autoPlay playsInline
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
                 i === active ? 'opacity-100' : 'opacity-0'
               }`} />
           ) : (
-            <Image key={img.id} src={img.url} alt={img.altText ?? ''}
+            <Image key={img.id} src={safeCdnUrl(img.url)} alt={img.altText ?? ''}
               fill
               className={`object-cover transition-opacity duration-1000 ease-in-out ${
                 i === active ? 'opacity-100' : 'opacity-0'
