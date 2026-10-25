@@ -1,4 +1,4 @@
-# VIT ELECTRONICS
+# VIT ELECTRONICS(Initial Name : NextCircuit)
 
 A next-generation tech & smart gadgets e-commerce platform built with Next.js 16 and NestJS 11, natively integrated with 23 AWS services including Amazon RDS PostgreSQL, S3, CloudFront, SQS, SNS, and EC2. Includes a full storefront, admin portal, product/order management, WhatsApp concierge, branded invoice PDFs, and rate-limited authentication.
 
